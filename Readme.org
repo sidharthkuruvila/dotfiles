@@ -1,0 +1,13 @@
+#+title: Dotfiles
+
+This is my attempt at keeping a consistent development environment.
+
+* Organization
+
+The files are stored in a directory called dotfiles in the $HOME. The config files are soft linked to their correct locations. This means that the dotfiles directory itself does not need to contain unused files. And we don't polute $HOME with unnecessary directories.
+
+* Emacs
+
+The emacs configuration is based on the System Crafters [[https://github.com/daviwil/dotfiles][dotfile]] by David Wilson. The configuration is maintained in a literate org mode file. The file is used to generate the init.el file.
+
+
