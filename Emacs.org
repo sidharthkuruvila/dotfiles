@@ -155,7 +155,17 @@ The following aliases can be used to connect to emacs from the terminal.
    (emacs-lisp . t)))
 #+end_src
 
-* Org Roam
+** Journalling with org journal
+
+Use  [[https://github.com/bastibe/org-journal][org-journal]] for daily journalling.
+
+#+begin_src emacs-lisp
+      (use-package org-journal
+        :config
+        (setq org-journal-dir "~/Documents/Notes/Journal"))
+#+end_src
+
+* Org Roam,
 
 #+begin_src emacs-lisp
   (use-package org-roam
@@ -195,6 +205,13 @@ The following aliases can be used to connect to emacs from the terminal.
 #+end_src
 
 * Appearance
+
+
+Compat appears to be required by doom modeline
+#+begin_src emacs-lisp
+  (use-package compat)
+#+end_src
+
 
 #+begin_src emacs-lisp
   ;; Use the doom modeline

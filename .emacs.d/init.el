@@ -97,6 +97,10 @@ started from a shell."
    (dot . t)
    (emacs-lisp . t)))
 
+(use-package org-journal
+  :config
+  (setq org-journal-dir "~/Documents/Notes/Journal"))
+
 (use-package org-roam
   :custom
   (org-roam-directory "~/Documents/Notes/Roam")
@@ -123,6 +127,8 @@ started from a shell."
 (use-package ivy-rich
   :init
   (ivy-rich-mode 1))
+
+(use-package compat)
 
 ;; Use the doom modeline
 ;; https://github.com/seagle0128/doom-modeline
