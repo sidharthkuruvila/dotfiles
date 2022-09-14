@@ -5,6 +5,8 @@ This is my attempt moving to a literate emacs config file. I am going ot base a 
 
 The original file can be found at [[https://github.com/daviwil/dotfiles/blob/master/Emacs.org][Emacs.org]]
 
+To generate the file either run *M-x org-babel-tangle* or *C-c C-v t*. The generated file is stored in .emacs.d/init.el.
+
 * Basic UI Configuration
 
 #+begin_src emacs-lisp
@@ -153,6 +155,12 @@ The following aliases can be used to connect to emacs from the terminal.
    (ocaml . t)
    (dot . t)
    (emacs-lisp . t)))
+#+end_src
+
+Disable the confirm step for running code in org babel
+
+#+begin_src emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
 #+end_src
 
 ** Journalling with org journal

@@ -97,6 +97,8 @@ started from a shell."
    (dot . t)
    (emacs-lisp . t)))
 
+(setq org-confirm-babel-evaluate nil)
+
 (use-package org-journal
   :config
   (setq org-journal-dir "~/Documents/Notes/Journal"))
