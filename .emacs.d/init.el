@@ -62,8 +62,9 @@ started from a shell."
 
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")
+                         ("non-gnu-elpa" . "https://elpa.nongnu.org/nongnu/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -78,6 +79,13 @@ started from a shell."
 
 (use-package diminish)
 
+(when (file-directory-p "/opt/homebrew/share/emacs/site-lisp/asymptote/")
+  (add-to-list 'load-path "/opt/homebrew/share/emacs/site-lisp/asymptote/")
+  (autoload 'asy-mode "asy-mode.el" "Asymptote major mode." t)
+  (autoload 'lasy-mode "asy-mode.el" "hybrid Asymptote/Latex major mode." t)
+  (autoload 'asy-insinuate-latex "asy-mode.el" "Asymptote insinuate LaTeX." t)
+  (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
+
 (defun efs/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
@@ -87,6 +95,8 @@ started from a shell."
   :pin org
   :hook (org-mode . efs/org-mode-setup))
 
+(use-package org-contrib)
+
 (setq org-babel-python-command "python3")
 
 ;; active Babel languages
@@ -95,7 +105,9 @@ started from a shell."
  '((python . t)
    (ocaml . t)
    (dot . t)
-   (emacs-lisp . t)))
+   (emacs-lisp . t)
+   (asymptote . t)
+   ))
 
 (setq org-confirm-babel-evaluate nil)
 

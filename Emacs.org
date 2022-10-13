@@ -106,8 +106,9 @@ The following aliases can be used to connect to emacs from the terminal.
 #+begin_src emacs-lisp
   (require 'package)
   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			   ("org" . "https://orgmode.org/elpa/")
-			   ("elpa" . "https://elpa.gnu.org/packages/")))
+                           ("org" . "https://orgmode.org/elpa/")
+                           ("elpa" . "https://elpa.gnu.org/packages/")
+                           ("non-gnu-elpa" . "https://elpa.nongnu.org/nongnu/")))
 
   (package-initialize)
   (unless package-archive-contents
@@ -127,6 +128,27 @@ The following aliases can be used to connect to emacs from the terminal.
 #+end_src
 
 
+* Asymptote
+
+Asymptote is a programming language for generating vector graphics. asymptote needs to be installed using homebrew for the Asymptote mode is loaded.
+
+The cond checks for the emacs list directory for asymptote installed by brew.
+
+To install asymptote run
+
+#+begin_src shell
+  brew install asymptote
+#+end_src
+
+#+begin_src emacs-lisp
+  (when (file-directory-p "/opt/homebrew/share/emacs/site-lisp/asymptote/")
+    (add-to-list 'load-path "/opt/homebrew/share/emacs/site-lisp/asymptote/")
+    (autoload 'asy-mode "asy-mode.el" "Asymptote major mode." t)
+    (autoload 'lasy-mode "asy-mode.el" "hybrid Asymptote/Latex major mode." t)
+    (autoload 'asy-insinuate-latex "asy-mode.el" "Asymptote insinuate LaTeX." t)
+    (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
+#+end_src
+
 * Org Mode
 
 #+begin_src emacs-lisp
@@ -140,6 +162,14 @@ The following aliases can be used to connect to emacs from the terminal.
     :hook (org-mode . efs/org-mode-setup))
 #+end_src
 
+** Install org-contrib
+
+Org contrib is a collection of unsuported org extentions. It includes ob-asymptote which is require to enable asymptote scripts in org-babel.
+
+#+begin_src emacs-lisp
+  (use-package org-contrib)
+#+end_src
+
 ** Programming languages
 
 #+begin_src emacs-lisp
@@ -147,14 +177,14 @@ The following aliases can be used to connect to emacs from the terminal.
 #+end_src
 
 #+begin_src emacs-lisp
-  
-;; active Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)
-   (ocaml . t)
-   (dot . t)
-   (emacs-lisp . t)))
+  ;; active Babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (ocaml . t)
+     (dot . t)
+     (emacs-lisp . t)
+     (asymptote . t)))
 #+end_src
 
 Disable the confirm step for running code in org babel
