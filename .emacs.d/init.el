@@ -92,6 +92,22 @@ started from a shell."
   (visual-line-mode 1))
 
 (use-package org
+  :config
+  ;; Enabling inline images with the default emacs scroll behaviour creates a bad experience
+  ;; Emacs scrolls a line at a time. It treats the image height as the line height which means
+  ;; that scrolling over an image will cause to to jump to show the entire image.
+  ;; Emacs has two approaches to solve this. insert-sliced-image, which splits an image into multiple lines,
+  ;; it is not clear to me whether insert-sliced-image can be used with org mode. The second alternative
+  ;; is pixel based scrolling, which does not appear to be popular in current versions of emacs.
+  ;; Emacs 29 apprantly has a better pixel based scrolling. I need to do a bit of research before I can enable
+  ;; inline images.
+  ;;
+  ;; Things to consider
+  ;; - What are the performance and user experience issues with pixel based scrolling
+  ;; - Can org mode be made to use sliced images
+  ;; - Would enabling inline images only for roam notes be acceptable.
+
+  ;(setq org-startup-with-inline-images t)
   :pin org
   :hook (org-mode . efs/org-mode-setup))
 
@@ -106,8 +122,7 @@ started from a shell."
    (ocaml . t)
    (dot . t)
    (emacs-lisp . t)
-   (asymptote . t)
-   ))
+   (asymptote . t)))
 
 (setq org-confirm-babel-evaluate nil)
 
