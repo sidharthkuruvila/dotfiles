@@ -128,8 +128,10 @@ started from a shell."
 
 (use-package org-journal
   :config
-  (setq org-journal-dir "~/Documents/Notes/Journal"))
+  (setq org-journal-dir "~/Documents/Notes/Journal")
+  (setq org-journal-file-format "%Y%m%d.org"))
 
+(message "using package org-roam")
 (use-package org-roam
   :custom
   (org-roam-directory "~/Documents/Notes/Roam")
@@ -137,7 +139,9 @@ started from a shell."
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))
   :config
-  (org-roam-setup))
+  (org-roam-setup)
+  (org-roam-db-autosync-mode))
+(message "done setting up org-roam")
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
