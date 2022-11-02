@@ -122,7 +122,8 @@ started from a shell."
    (ocaml . t)
    (dot . t)
    (emacs-lisp . t)
-   (asymptote . t)))
+   (asymptote . t)
+   (plantuml . t)))
 
 (setq org-confirm-babel-evaluate nil)
 
@@ -231,3 +232,8 @@ started from a shell."
 ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
 ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
+
+(use-package plantuml-mode
+  :config
+  (setq org-plantuml-jar-path (expand-file-name "/opt/homebrew/Cellar/plantuml/1.2022.12/libexec/plantuml.jar"))
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))

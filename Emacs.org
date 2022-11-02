@@ -127,7 +127,6 @@ The following aliases can be used to connect to emacs from the terminal.
   (use-package diminish)
 #+end_src
 
-
 * Asymptote
 
 Asymptote is a programming language for generating vector graphics. asymptote needs to be installed using homebrew for the Asymptote mode is loaded.
@@ -200,7 +199,8 @@ Org contrib is a collection of unsuported org extentions. It includes ob-asympto
      (ocaml . t)
      (dot . t)
      (emacs-lisp . t)
-     (asymptote . t)))
+     (asymptote . t)
+     (plantuml . t)))
 #+end_src
 
 Disable the confirm step for running code in org babel
@@ -367,4 +367,15 @@ When [[https://github.com/justbur/emacs-which-key][Which Key]] is enabled keyboa
   ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
   (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
   ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
+#+end_src
+
+* Plantuml
+
+[[https://plantuml.com/][Plantuml]] is a language for describing UML and other diagrams. 
+
+#+begin_src emacs-lisp
+  (use-package plantuml-mode
+    :config
+    (setq org-plantuml-jar-path (expand-file-name "/opt/homebrew/Cellar/plantuml/1.2022.12/libexec/plantuml.jar"))
+    (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
 #+end_src
