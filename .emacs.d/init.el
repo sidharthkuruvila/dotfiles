@@ -233,7 +233,12 @@ started from a shell."
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
 ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
 
+(defun find-plantuml-jar-path ()
+  (let ((base-path "/opt/homebrew/Cellar/plantuml/"))
+    ;; Get the first directory, there should only be one
+    (let ((plantuml-version (car (directory-files  base-path nil directory-files-no-dot-files-regexp))))
+      (concat base-path plantuml-version "/libexec/plantuml.jar"))))
 (use-package plantuml-mode
   :config
-  (setq org-plantuml-jar-path (expand-file-name "/opt/homebrew/Cellar/plantuml/1.2022.12/libexec/plantuml.jar"))
+  (setq org-plantuml-jar-path ( find-plantuml-jar-path ))
   (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))

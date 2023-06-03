@@ -374,8 +374,13 @@ When [[https://github.com/justbur/emacs-which-key][Which Key]] is enabled keyboa
 [[https://plantuml.com/][Plantuml]] is a language for describing UML and other diagrams. 
 
 #+begin_src emacs-lisp
+  (defun find-plantuml-jar-path ()
+    (let ((base-path "/opt/homebrew/Cellar/plantuml/"))
+      ;; Get the first directory, there should only be one
+      (let ((plantuml-version (car (directory-files  base-path nil directory-files-no-dot-files-regexp))))
+        (concat base-path plantuml-version "/libexec/plantuml.jar"))))
   (use-package plantuml-mode
     :config
-    (setq org-plantuml-jar-path (expand-file-name "/opt/homebrew/Cellar/plantuml/1.2022.12/libexec/plantuml.jar"))
+    (setq org-plantuml-jar-path ( find-plantuml-jar-path ))
     (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
 #+end_src
