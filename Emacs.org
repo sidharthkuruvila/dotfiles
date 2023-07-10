@@ -148,6 +148,17 @@ To install asymptote run
     (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
 #+end_src
 
+* Graphviz
+
+Set up syntax highlighting for Graphviz dot files.
+
+#+begin_src emacs-lisp
+  (use-package graphviz-dot-mode
+    :ensure t
+    :config
+    (setq graphviz-dot-indent-width 2))
+#+end_src
+
 * Org Mode
 
 #+begin_src emacs-lisp
@@ -199,6 +210,7 @@ Org contrib is a collection of unsuported org extentions. It includes ob-asympto
      (ocaml . t)
      (dot . t)
      (emacs-lisp . t)
+     (sqlite . t)
      (asymptote . t)
      (plantuml . t)))
 #+end_src

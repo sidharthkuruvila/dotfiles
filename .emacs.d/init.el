@@ -86,6 +86,11 @@ started from a shell."
   (autoload 'asy-insinuate-latex "asy-mode.el" "Asymptote insinuate LaTeX." t)
   (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
 
+(use-package graphviz-dot-mode
+  :ensure t
+  :config
+  (setq graphviz-dot-indent-width 2))
+
 (defun efs/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
@@ -122,6 +127,7 @@ started from a shell."
    (ocaml . t)
    (dot . t)
    (emacs-lisp . t)
+   (sqlite . t)
    (asymptote . t)
    (plantuml . t)))
 
