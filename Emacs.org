@@ -396,3 +396,19 @@ When [[https://github.com/justbur/emacs-which-key][Which Key]] is enabled keyboa
     (setq org-plantuml-jar-path ( find-plantuml-jar-path ))
     (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
 #+end_src
+
+
+* Move customizations to a separate file
+
+#+begin_src emacs-lisp
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file 'noerror)
+#+end_src
+
+* Local emacs script
+
+#+begin_src emacs-lisp
+  (let ((local-elisp-file "~/.emacs.d/local.el"))
+    (if (file-exists-p local-elisp-file)
+        (load local-elisp-file)))
+#+end_src

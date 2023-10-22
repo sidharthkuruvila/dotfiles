@@ -248,3 +248,10 @@ started from a shell."
   :config
   (setq org-plantuml-jar-path ( find-plantuml-jar-path ))
   (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+
+(let ((local-elisp-file "~/.emacs.d/local.el"))
+  (if (file-exists-p local-elisp-file)
+      (load local-elisp-file)))
