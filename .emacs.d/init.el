@@ -91,6 +91,16 @@ started from a shell."
   :config
   (setq graphviz-dot-indent-width 2))
 
+(use-package gnuplot
+  :ensure t
+  :config
+  (setq graphviz-dot-indent-width 2))
+
+(use-package es-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.es$" . es-mode)))
+
 (defun efs/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
@@ -129,7 +139,10 @@ started from a shell."
    (emacs-lisp . t)
    (sqlite . t)
    (asymptote . t)
-   (plantuml . t)))
+   (plantuml . t)
+   (awk . t)
+   (gnuplot . t)
+   (elasticsearch . t)))
 
 (setq org-confirm-babel-evaluate nil)
 

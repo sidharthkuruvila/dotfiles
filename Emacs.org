@@ -159,6 +159,28 @@ Set up syntax highlighting for Graphviz dot files.
     (setq graphviz-dot-indent-width 2))
 #+end_src
 
+* Gnuplot
+
+Using https://github.com/emacs-gnuplot/gnuplot
+
+#+begin_src emacs-lisp
+  (use-package gnuplot
+    :ensure t
+    :config
+    (setq graphviz-dot-indent-width 2))
+#+end_src
+
+* Es mode
+
+From https://github.com/dakrone/es-mode
+
+#+begin_src emacs-lisp
+  (use-package es-mode
+    :ensure t
+    :config
+    (add-to-list 'auto-mode-alist '("\\.es$" . es-mode)))
+#+end_src
+
 * Org Mode
 
 #+begin_src emacs-lisp
@@ -203,16 +225,19 @@ Org contrib is a collection of unsuported org extentions. It includes ob-asympto
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; active Babel languages
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)
-     (ocaml . t)
-     (dot . t)
-     (emacs-lisp . t)
-     (sqlite . t)
-     (asymptote . t)
-     (plantuml . t)))
+    ;; active Babel languages
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((python . t)
+       (ocaml . t)
+       (dot . t)
+       (emacs-lisp . t)
+       (sqlite . t)
+       (asymptote . t)
+       (plantuml . t)
+       (awk . t)
+       (gnuplot . t)
+       (elasticsearch . t)))
 #+end_src
 
 Disable the confirm step for running code in org babel
