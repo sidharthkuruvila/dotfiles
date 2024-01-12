@@ -37,6 +37,13 @@ To generate the file either run *M-x org-babel-tangle* or *C-c C-v t*. The gener
 
 #+end_src
 
+
+Enable pixel precision scrolling.  This should make it possible to render images inline by default.
+
+#+begin_src emacs-lisp
+  (pixel-scroll-precision-mode 1)
+#+end_src
+
 * Copied from the orginial .emacs file
 
 #+begin_src emacs-lisp
@@ -127,6 +134,14 @@ The following aliases can be used to connect to emacs from the terminal.
   (use-package diminish)
 #+end_src
 
+* Magit
+
+https://magit.vc/
+
+#+begin_src emacs-lisp
+    (use-package magit)
+#+end_src
+
 * Asymptote
 
 Asymptote is a programming language for generating vector graphics. asymptote needs to be installed using homebrew for the Asymptote mode is loaded.
@@ -181,6 +196,19 @@ From https://github.com/dakrone/es-mode
     (add-to-list 'auto-mode-alist '("\\.es$" . es-mode)))
 #+end_src
 
+* Sqlite
+
+Use the homebrew version of sqlite3 for org babel if it is avaiable.
+
+#+begin_src emacs-lisp
+  (when (file-directory-p "/opt/homebrew/opt/sqlite/bin")
+    (setq org-babel-sqlite3-command "/opt/homebrew/opt/sqlite/bin/sqlite3"))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package emacsql-sqlite-builtin)
+#+end_src
+
 * Org Mode
 
 #+begin_src emacs-lisp
@@ -191,21 +219,7 @@ From https://github.com/dakrone/es-mode
 
   (use-package org
     :config
-    ;; Enabling inline images with the default emacs scroll behaviour creates a bad experience
-    ;; Emacs scrolls a line at a time. It treats the image height as the line height which means
-    ;; that scrolling over an image will cause to to jump to show the entire image.
-    ;; Emacs has two approaches to solve this. insert-sliced-image, which splits an image into multiple lines,
-    ;; it is not clear to me whether insert-sliced-image can be used with org mode. The second alternative
-    ;; is pixel based scrolling, which does not appear to be popular in current versions of emacs.
-    ;; Emacs 29 apprantly has a better pixel based scrolling. I need to do a bit of research before I can enable
-    ;; inline images.
-    ;;
-    ;; Things to consider
-    ;; - What are the performance and user experience issues with pixel based scrolling
-    ;; - Can org mode be made to use sliced images
-    ;; - Would enabling inline images only for roam notes be acceptable.
-    
-    ;(setq org-startup-with-inline-images t)
+    (setq org-startup-with-inline-images t)
     :pin org
     :hook (org-mode . efs/org-mode-setup))
 #+end_src
