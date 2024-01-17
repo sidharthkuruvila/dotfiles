@@ -137,7 +137,8 @@ started from a shell."
    (plantuml . t)
    (awk . t)
    (gnuplot . t)
-   (elasticsearch . t)))
+   (elasticsearch . t)
+   (shell . t)))
 
 (setq org-confirm-babel-evaluate nil)
 
