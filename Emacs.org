@@ -163,6 +163,14 @@ To install asymptote run
     (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
 #+end_src
 
+* Bazel
+
+From https://github.com/bazelbuild/emacs-bazel-mode/tree/769b30dc18282564d614d7044195b5a0c1a0a5f3
+#+begin_src emacs-lisp
+    (use-package bazel
+      :ensure t)
+#+end_src
+
 * Graphviz
 
 Set up syntax highlighting for Graphviz dot files.
@@ -196,6 +204,42 @@ From https://github.com/dakrone/es-mode
     (add-to-list 'auto-mode-alist '("\\.es$" . es-mode)))
 #+end_src
 
+* Json Mode
+
+From https://github.com/json-emacs/json-mode
+
+#+begin_src elisp
+    (use-package json-mode
+      :ensure 1)
+#+end_src
+
+* Jq Mode
+
+From https://github.com/ljos/jq-mode
+
+#+begin_src emacs-lisp
+  (use-package jq-mode
+    :ensure t
+    :config
+    (add-to-list 'auto-mode-alist '("\\.jq$" . jq-mode)))
+#+end_src
+
+* Protobuf mode
+
+From https://github.com/protocolbuffers/protobuf/blob/main/editors/protobuf-mode.el
+
+#+begin_src emacs-lisp
+  (defconst my-protobuf-style
+    '((c-basic-offset . 2)
+      (indent-tabs-mode . nil)))
+  
+  (use-package protobuf-mode
+    :ensure t
+    :config
+    (add-hook 'protobuf-mode-hook
+              (lambda () (c-add-style "my-style" my-protobuf-style t))))
+#+end_src
+
 * Sqlite
 
 Use the homebrew version of sqlite3 for org babel if it is avaiable.
@@ -208,6 +252,7 @@ Use the homebrew version of sqlite3 for org babel if it is avaiable.
 #+begin_src emacs-lisp
   (use-package emacsql-sqlite-builtin)
 #+end_src
+
 
 * Org Mode
 
@@ -252,7 +297,8 @@ Org contrib is a collection of unsuported org extentions. It includes ob-asympto
      (awk . t)
      (gnuplot . t)
      (elasticsearch . t)
-     (shell . t)))
+     (shell . t)
+     (jq . t)))
 #+end_src
 
 Disable the confirm step for running code in org babel

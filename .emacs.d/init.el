@@ -90,6 +90,9 @@ started from a shell."
   (autoload 'asy-insinuate-latex "asy-mode.el" "Asymptote insinuate LaTeX." t)
   (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
 
+(use-package bazel
+  :ensure t)
+
 (use-package graphviz-dot-mode
   :ensure t
   :config
@@ -104,6 +107,21 @@ started from a shell."
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.es$" . es-mode)))
+
+(use-package jq-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.jq$" . jq-mode)))
+
+(defconst my-protobuf-style
+  '((c-basic-offset . 2)
+    (indent-tabs-mode . nil)))
+
+(use-package protobuf-mode
+  :ensure t
+  :config
+  (add-hook 'protobuf-mode-hook
+            (lambda () (c-add-style "my-style" my-protobuf-style t))))
 
 (when (file-directory-p "/opt/homebrew/opt/sqlite/bin")
   (setq org-babel-sqlite3-command "/opt/homebrew/opt/sqlite/bin/sqlite3"))
@@ -138,7 +156,8 @@ started from a shell."
    (awk . t)
    (gnuplot . t)
    (elasticsearch . t)
-   (shell . t)))
+   (shell . t)
+   (jq . t)))
 
 (setq org-confirm-babel-evaluate nil)
 
