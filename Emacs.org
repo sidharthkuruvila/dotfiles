@@ -188,9 +188,7 @@ Using https://github.com/emacs-gnuplot/gnuplot
 
 #+begin_src emacs-lisp
   (use-package gnuplot
-    :ensure t
-    :config
-    (setq graphviz-dot-indent-width 2))
+    :ensure t)
 #+end_src
 
 * Es mode
@@ -208,9 +206,9 @@ From https://github.com/dakrone/es-mode
 
 From https://github.com/json-emacs/json-mode
 
-#+begin_src elisp
-    (use-package json-mode
-      :ensure 1)
+#+begin_src emacs-lisp
+  (use-package json-mode
+    :ensure t)
 #+end_src
 
 * Jq Mode
@@ -251,6 +249,17 @@ Use the homebrew version of sqlite3 for org babel if it is avaiable.
 
 #+begin_src emacs-lisp
   (use-package emacsql-sqlite-builtin)
+#+end_src
+
+* Rust mode
+
+From https://github.com/rust-lang/rust-mode
+
+#+begin_src emacs-lisp
+      (use-package rust-mode
+        :ensure t
+        :config
+        (setq rust-format-on-save t))
 #+end_src
 
 
@@ -438,13 +447,11 @@ When [[https://github.com/justbur/emacs-which-key][Which Key]] is enabled keyboa
 #+begin_src emacs-lisp
   (use-package projectile
     :diminish projectile-mode
-    :config (projectile-mode)
-    :init 
-    (projectile-mode +1)
-    :bind-keymap
-    ("C-c p" . projectile-command-map)
     :init
-    (setq projectile-project-search-path `("~/Documents/Notes" "~/code" "~/dotfiles")))
+    (projectile-mode +1)
+    (setq projectile-project-search-path '("~/Documents/Notes" "~/code" "~/dotfiles"))
+    :bind-keymap
+    ("C-c p" . projectile-command-map))
 #+end_src
 
 
@@ -462,9 +469,9 @@ When [[https://github.com/justbur/emacs-which-key][Which Key]] is enabled keyboa
 
   (add-hook 'tuareg-mode-hook 'set-ocaml-error-regexp)
   (add-hook 'caml-mode-hook 'set-ocaml-error-regexp)
-  ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
-  (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
-  ;; ## end of OPAM user-setup addition for emacs / base ## keep this line
+  (let ((opam-setup "~/.emacs.d/opam-user-setup.el"))
+    (when (file-exists-p opam-setup)
+      (require 'opam-user-setup opam-setup)))
 #+end_src
 
 * Plantuml

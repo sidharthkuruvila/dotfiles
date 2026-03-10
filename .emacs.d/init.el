@@ -128,6 +128,9 @@ started from a shell."
 
 (use-package emacsql-sqlite-builtin)
 
+(use-package rust-mode
+  :ensure t)
+
 (defun efs/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
