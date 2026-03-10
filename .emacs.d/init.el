@@ -99,14 +99,15 @@ started from a shell."
   (setq graphviz-dot-indent-width 2))
 
 (use-package gnuplot
-  :ensure t
-  :config
-  (setq graphviz-dot-indent-width 2))
+  :ensure t)
 
 (use-package es-mode
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.es$" . es-mode)))
+
+(use-package json-mode
+  :ensure t)
 
 (use-package jq-mode
   :ensure t
@@ -129,12 +130,23 @@ started from a shell."
 (use-package emacsql-sqlite-builtin)
 
 (use-package rust-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq rust-format-on-save t))
 
 (defun efs/org-mode-setup ()
   (org-indent-mode)
   (variable-pitch-mode 1)
-  (visual-line-mode 1))
+  (visual-line-mode 1)
+  (dolist (face '(org-block
+                  org-block-begin-line
+                  org-block-end-line
+                  org-code
+                  org-table
+                  org-verbatim
+                  org-formula
+                  org-indent))
+    (set-face-attribute face nil :inherit 'fixed-pitch)))
 
 (use-package org
   :config
@@ -247,13 +259,11 @@ started from a shell."
 
 (use-package projectile
   :diminish projectile-mode
-  :config (projectile-mode)
-  :init 
-  (projectile-mode +1)
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
   :init
-  (setq projectile-project-search-path `("~/Documents/Notes" "~/code" "~/dotfiles")))
+  (projectile-mode +1)
+  (setq projectile-project-search-path '("~/Documents/Notes" "~/code" "~/dotfiles"))
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
 
 ;; OCaml configuration
 ;;  - better error and backtrace matching
@@ -266,9 +276,9 @@ started from a shell."
 
 (add-hook 'tuareg-mode-hook 'set-ocaml-error-regexp)
 (add-hook 'caml-mode-hook 'set-ocaml-error-regexp)
-;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
-(require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
-;; ## end of OPAM user-setup addition for emacs / base ## keep this line
+(let ((opam-setup "~/.emacs.d/opam-user-setup.el"))
+  (when (file-exists-p opam-setup)
+    (require 'opam-user-setup opam-setup)))
 
 (defun find-plantuml-jar-path ()
   (let ((base-path "/opt/homebrew/Cellar/plantuml/"))

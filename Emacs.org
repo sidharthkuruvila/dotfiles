@@ -269,7 +269,16 @@ From https://github.com/rust-lang/rust-mode
   (defun efs/org-mode-setup ()
     (org-indent-mode)
     (variable-pitch-mode 1)
-    (visual-line-mode 1))
+    (visual-line-mode 1)
+    (dolist (face '(org-block
+                    org-block-begin-line
+                    org-block-end-line
+                    org-code
+                    org-table
+                    org-verbatim
+                    org-formula
+                    org-indent))
+      (set-face-attribute face nil :inherit 'fixed-pitch)))
 
   (use-package org
     :config
