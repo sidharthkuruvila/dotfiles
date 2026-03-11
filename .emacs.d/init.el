@@ -266,20 +266,21 @@ started from a shell."
   :bind-keymap
   ("C-c p" . projectile-command-map))
 
-;; OCaml configuration
-;;  - better error and backtrace matching
-
-(defun set-ocaml-error-regexp ()
-  (set
-   'compilation-error-regexp-alist
-   (list '("[Ff]ile \\(\"\\(.*?\\)\", line \\(-?[0-9]+\\)\\(, characters \\(-?[0-9]+\\)-\\([0-9]+\\)\\)?\\)\\(:\n\\(\\(Warning .*?\\)\\|\\(Error\\)\\):\\)?"
-           2 3 (5 . 6) (9 . 11) 1 (8 compilation-message-face)))))
-
-(add-hook 'tuareg-mode-hook 'set-ocaml-error-regexp)
-(add-hook 'caml-mode-hook 'set-ocaml-error-regexp)
-(let ((opam-setup "~/.emacs.d/opam-user-setup.el"))
-  (when (file-exists-p opam-setup)
-    (require 'opam-user-setup opam-setup)))
+(use-package tuareg
+  :ensure t
+  :config
+  ;; OCaml configuration
+  ;;  - better error and backtrace matching
+  (defun set-ocaml-error-regexp ()
+    (set
+     'compilation-error-regexp-alist
+     (list '("[Ff]ile \\(\"\\(.*?\\)\", line \\(-?[0-9]+\\)\\(, characters \\(-?[0-9]+\\)-\\([0-9]+\\)\\)?\\)\\(:\n\\(\\(Warning .*?\\)\\|\\(Error\\)\\):\\)?"
+             2 3 (5 . 6) (9 . 11) 1 (8 compilation-message-face)))))
+  (add-hook 'tuareg-mode-hook 'set-ocaml-error-regexp)
+  (add-hook 'caml-mode-hook 'set-ocaml-error-regexp)
+  (let ((opam-setup "~/.emacs.d/opam-user-setup.el"))
+    (when (file-exists-p opam-setup)
+      (require 'opam-user-setup opam-setup))))
 
 (defun find-plantuml-jar-path ()
   (let ((base-path "/opt/homebrew/Cellar/plantuml/"))
