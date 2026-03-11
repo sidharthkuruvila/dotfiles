@@ -16,10 +16,10 @@
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
-		term-mode-hook
-		shell-mode-hook
-		treemacs-mode-hook
-		eshell-mode-hook))
+		  term-mode-hook
+		  shell-mode-hook
+		  treemacs-mode-hook
+		  eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (pixel-scroll-precision-mode 1)
@@ -153,6 +153,9 @@ started from a shell."
   :hook (org-mode . efs/org-mode-setup))
 
 (use-package org-contrib)
+
+(use-package htmlize
+  :ensure t)
 
 (setq org-babel-python-command "python3")
 
