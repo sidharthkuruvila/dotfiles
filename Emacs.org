@@ -204,11 +204,10 @@ From https://github.com/dakrone/es-mode
 
 * Json Mode
 
-From https://github.com/json-emacs/json-mode
+Emacs 29+ includes =json-ts-mode= built-in. Enable it for =.json= files.
 
 #+begin_src emacs-lisp
-  (use-package json-mode
-    :ensure t)
+  (add-to-list 'auto-mode-alist '("\\.json$" . json-ts-mode))
 #+end_src
 
 * Jq Mode

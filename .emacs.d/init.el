@@ -106,8 +106,7 @@ started from a shell."
   :config
   (add-to-list 'auto-mode-alist '("\\.es$" . es-mode)))
 
-(use-package json-mode
-  :ensure t)
+(add-to-list 'auto-mode-alist '("\\.json$" . json-ts-mode))
 
 (use-package jq-mode
   :ensure t
