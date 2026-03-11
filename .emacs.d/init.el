@@ -183,6 +183,7 @@ started from a shell."
 (use-package org-roam
   :custom
   (org-roam-directory "~/Documents/Notes/Roam")
+  (org-roam-database-connector 'sqlite-builtin)
   :bind (("C-c n l"  . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))
