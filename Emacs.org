@@ -280,7 +280,6 @@ From https://github.com/rust-lang/rust-mode
   (use-package org
     :config
     (setq org-startup-with-inline-images t)
-    :pin org
     :hook (org-mode . efs/org-mode-setup))
 #+end_src
 

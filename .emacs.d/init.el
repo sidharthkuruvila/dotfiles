@@ -148,7 +148,6 @@ started from a shell."
 (use-package org
   :config
   (setq org-startup-with-inline-images t)
-  :pin org
   :hook (org-mode . efs/org-mode-setup))
 
 (use-package org-contrib)
