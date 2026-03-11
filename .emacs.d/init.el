@@ -24,6 +24,8 @@
 
 (pixel-scroll-precision-mode 1)
 
+(setq make-backup-files nil)
+
 ;; ANSI color in compilation buffer
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()

@@ -44,6 +44,14 @@ Enable pixel precision scrolling.  This should make it possible to render images
   (pixel-scroll-precision-mode 1)
 #+end_src
 
+* Backups
+
+Disable backup files to avoid =~= files cluttering the filesystem.
+
+#+begin_src emacs-lisp
+  (setq make-backup-files nil)
+#+end_src
+
 * Copied from the orginial .emacs file
 
 #+begin_src emacs-lisp
