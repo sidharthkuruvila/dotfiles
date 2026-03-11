@@ -27,9 +27,8 @@
 ;; ANSI color in compilation buffer
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
-  (toggle-read-only)
-  (ansi-color-apply-on-region (point-min) (point-max))
-  (toggle-read-only))
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region (point-min) (point-max))))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;; Some key bindings
@@ -64,7 +63,6 @@ started from a shell."
 
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")
                          ("non-gnu-elpa" . "https://elpa.nongnu.org/nongnu/")))
 
@@ -188,7 +186,6 @@ started from a shell."
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))
   :config
-  (org-roam-setup)
   (org-roam-db-autosync-mode))
 (message "done setting up org-roam")
 
