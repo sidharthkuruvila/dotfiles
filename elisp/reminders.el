@@ -32,9 +32,13 @@ preceded by an import timestamp header. Mark each reminder as complete."
       (with-temp-buffer
         (insert (format "\n# Imported %s\n" (format-time-string "%Y-%m-%d %H:%M")))
         (dolist (reminder reminders)
-          (let ((notes (alist-get 'notes reminder)))
+          (let ((notes (alist-get 'notes reminder))
+                (id    (alist-get 'externalId reminder)))
             (when (and notes (not (string-empty-p notes)))
-              (insert notes)
+              (insert (replace-regexp-in-string
+                       ":END:"
+                       (format ":REMINDER_ID: %s\n:END:" id)
+                       notes t t))
               (unless (string-suffix-p "\n" notes)
                 (insert "\n")))))
         (append-to-file (point-min) (point-max) inbox-file))
