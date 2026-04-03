@@ -519,6 +519,16 @@ When [[https://github.com/justbur/emacs-which-key][Which Key]] is enabled keyboa
   (load custom-file 'noerror)
 #+end_src
 
+* Local Packages
+
+Local Emacs modules live in =~/dotfiles/elisp/=. Each module is a domain-grouped
+file ending with =(provide 'symbol)=. See =CLAUDE.md= for conventions.
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (expand-file-name "~/dotfiles/elisp"))
+  (require 'reminders)
+#+end_src
+
 * Local emacs script
 
 #+begin_src emacs-lisp

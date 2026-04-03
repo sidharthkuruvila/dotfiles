@@ -1,0 +1,31 @@
+#+TITLE: Dotfiles Change Log
+#+DESCRIPTION: A record of significant decisions made in this dotfiles project. Read this before making structural changes.
+
+Entries are newest first. Each entry captures what was decided and why, including alternatives that were considered and rejected.
+
+* 2026-04-03 — Introduced elisp/ module directory and reminders workflow
+
+** elisp/ directory for local Emacs functions
+
+Custom Emacs functions now live in =~/dotfiles/elisp/=, with one file per functional domain. Each file ends with =(provide 'symbol)= and is loaded via =(require 'symbol)= from a dedicated =* Local Packages= section in =Emacs.org=. The load path is extended there with =(add-to-list 'load-path (expand-file-name "~/dotfiles/elisp"))=.
+
+Alternatives considered:
+- Adding code blocks directly to =Emacs.org= — rejected because it requires a tangle step for every change
+- Using =~/.emacs.d/local.el= — rejected because it is not version controlled
+- One file per function — rejected as too granular; domain grouping is the convention used by purcell, daviwil, and protesilaos
+
+** Keybindings stay in Emacs.org
+
+No keybindings are defined inside =elisp/= modules. Modules contain function definitions and =(provide ...)= only. Keybindings are defined in =Emacs.org= as the single source of truth.
+
+** reminders-cli over AppleScript for Reminders access
+
+Using =reminders-cli= (=brew install keith/formulae/reminders-cli=) rather than calling =osascript= with AppleScript. The CLI provides clean JSON output and is easier to test from the terminal. AppleScript was the initial plan before the CLI was installed.
+
+** Inbox file path and Inboxes directory
+
+Notes are appended to =~/Documents/Notes/Inboxes/Claude Inbox.org=. An =Inboxes/= subdirectory was created anticipating multiple inboxes in the future.
+
+** Hardcoded list name with plan to move to a global variable
+
+The Reminders list name (="Emacs Inbox"=) and inbox file path are hardcoded in =reminders.el= for now. The intention is to move these to a global variable when a second inbox is introduced.
