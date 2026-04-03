@@ -38,11 +38,10 @@ preceded by an import timestamp header. Mark each reminder as complete."
               (unless (string-suffix-p "\n" notes)
                 (insert "\n")))))
         (append-to-file (point-min) (point-max) inbox-file))
-      ;; Complete reminders by repeatedly completing index 1.
-      ;; Each completion removes that reminder from the incomplete list,
-      ;; making the next one index 1.
-      (dotimes (_ count)
-        (shell-command "reminders complete \"Emacs Inbox\" 1"))
+      ;; Complete each reminder by externalId to avoid index-shifting issues.
+      (dolist (reminder reminders)
+        (shell-command (format "reminders complete \"Emacs Inbox\" %s"
+                               (alist-get 'externalId reminder))))
       (let ((buf (get-file-buffer inbox-file)))
         (when buf
           (with-current-buffer buf
@@ -50,5 +49,6 @@ preceded by an import timestamp header. Mark each reminder as complete."
       (find-file inbox-file)
       (goto-char (point-max))
       (message "my/process-reminders: processed %d reminder(s)." count))))
+
 
 (provide 'reminders)
