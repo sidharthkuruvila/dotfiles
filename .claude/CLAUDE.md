@@ -15,6 +15,8 @@ Read `Change Log.org` in the repository root. It records why things are structur
 ├── Change Log.org     — decision log
 ├── .claude/
 │   └── CLAUDE.md      — this file
+├── bin/               — dotfiles scripts
+│   └── tangle-dotfiles.sh
 └── elisp/             — local Emacs modules (version controlled)
     └── reminders.el
 ```
