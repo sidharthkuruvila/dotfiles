@@ -197,7 +197,7 @@ started from a shell."
 (use-package denote
   :ensure t
   :custom
-  (denote-directory '("~/Documents/Notes2/knowledge/"
+  (denote-directories '("~/Documents/Notes2/knowledge/"
                       "~/Documents/Notes2/references/"
                       "~/Documents/Notes2/active/"
                       "~/Documents/Notes2/projects/"
