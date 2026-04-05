@@ -392,6 +392,36 @@ by Denote, but may contain =[[denote:ID]]= links.
            ("C-c n b" . denote-backlinks)))
 #+end_src
 
+* Org Capture
+
+Capture templates for the three singleton files. The journal template uses
+=my/journal-capture-position= (defined in =reminders.el=) to insert under
+today's =* YYYY-MM-DD= heading, consistent with the reminders pipeline.
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c c") #'org-capture)
+
+  (setq org-capture-templates
+        '(("i" "Inbox" entry
+           (file "~/Documents/Notes2/inbox.org")
+           "* %?\n:PROPERTIES:\n:CREATED: %<%Y-%m-%d %H:%M>\n:END:\n")
+          ("j" "Journal" entry
+           (file+function "~/Documents/Notes2/journal.org" my/journal-capture-position)
+           "** [%<%H:%M>] %?\n:PROPERTIES:\n:CREATED: %<%Y-%m-%d %H:%M>\n:END:\n")
+          ("s" "Stack" entry
+           (file "~/Documents/Notes2/stack.org")
+           "* %?\n:PROPERTIES:\n:CREATED: %<%Y-%m-%d %H:%M>\n:END:\n")))
+#+end_src
+
+* Org Agenda
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c a") #'org-agenda)
+
+  (setq org-agenda-files '("~/Documents/Notes2/inbox.org"
+                            "~/Documents/Notes2/stack.org"))
+#+end_src
+
 * Completion using Ivy and Counsel
 
 #+begin_src emacs-lisp

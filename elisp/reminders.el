@@ -92,6 +92,30 @@ org strings at ** level, separated by blank lines in the output."
           (insert (format "\n* %s%s" date block))))
       (save-buffer))))
 
+(defun my/journal-capture-position ()
+  "Move point to the insertion position for a new journal entry.
+Used as the target function for org-capture journal templates.
+Finds or creates today's * YYYY-MM-DD heading, positioning point
+at the end of that section so the new ** entry is appended."
+  (let* ((date    (format-time-string "%Y-%m-%d"))
+         (date-re (format "^\\* %s\\b" (regexp-quote date))))
+    (widen)
+    (goto-char (point-min))
+    (if (re-search-forward date-re nil t)
+        ;; Found — position at end of this date's section
+        (progn
+          (end-of-line)
+          (if (re-search-forward "^\\* " nil t)
+              (goto-char (match-beginning 0))
+            (goto-char (point-max))))
+      ;; Not found — create heading at top, after #+keywords (newest first)
+      (goto-char (point-min))
+      (while (and (not (eobp)) (looking-at "#\\+"))
+        (forward-line 1))
+      (insert (format "\n* %s\n" date))
+      (forward-line -1)
+      (end-of-line))))
+
 (defun my/process-reminders ()
   "Fetch incomplete reminders from the \"Emacs Inbox\" Reminders list.
 Routes #journal-tagged reminders to journal.org (grouped by :CREATED: date)

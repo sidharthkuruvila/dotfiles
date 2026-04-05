@@ -210,6 +210,24 @@ started from a shell."
          ("C-c n i" . denote-link-or-create)
          ("C-c n b" . denote-backlinks)))
 
+(global-set-key (kbd "C-c c") #'org-capture)
+
+(setq org-capture-templates
+      '(("i" "Inbox" entry
+         (file "~/Documents/Notes2/inbox.org")
+         "* %?\n:PROPERTIES:\n:CREATED: %<%Y-%m-%d %H:%M>\n:END:\n")
+        ("j" "Journal" entry
+         (file+function "~/Documents/Notes2/journal.org" my/journal-capture-position)
+         "** [%<%H:%M>] %?\n:PROPERTIES:\n:CREATED: %<%Y-%m-%d %H:%M>\n:END:\n")
+        ("s" "Stack" entry
+         (file "~/Documents/Notes2/stack.org")
+         "* %?\n:PROPERTIES:\n:CREATED: %<%Y-%m-%d %H:%M>\n:END:\n")))
+
+(global-set-key (kbd "C-c a") #'org-agenda)
+
+(setq org-agenda-files '("~/Documents/Notes2/inbox.org"
+                          "~/Documents/Notes2/stack.org"))
+
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x b" . counsel-ibuffer)
