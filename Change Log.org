@@ -20,10 +20,12 @@ preserving Denote's link integrity.
 ** PARA directory structure
 
 =knowledge/=, =references/=, =active/=, =projects/=, and =archive/= are the Denote
-directories. =knowledge/= and =references/= are flat. =active/= and =projects/= use
-Denote-ID-prefixed subdirectories so that co-located assets (PDFs, images) can live
-alongside their parent org file. =archive/= receives completed items as-is, with an
-=IDENTIFIER==YYYYMMDD= signature added to the directory or file name.
+directories. =knowledge/= and =references/= are flat. =active/= and =projects/= use plain dated
+subdirectories in the format =YYYYMMDD-project-name/= for readability. Denote filename
+conventions (=YYYYMMDDTHHMMSS--title__keyword=) were considered for directories but
+rejected as overkill — the date prefix is sufficient for chronological sort and the
+full Denote format hurts readability at the directory level. =archive/= receives
+completed items as-is.
 
 =active/= is named after PARA's "Areas" (ongoing responsibilities with no end date)
 but using a shorter, more descriptive name.
