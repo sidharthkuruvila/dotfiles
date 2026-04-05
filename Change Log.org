@@ -3,6 +3,54 @@
 
 Entries are newest first. Each entry captures what was decided and why, including alternatives that were considered and rejected.
 
+* 2026-04-05 — Migrated notes workflow to ~/Documents/Notes2/ with Denote and PARA
+
+** ~/Documents/Notes2/ replaces ~/Documents/Notes/
+
+All new note-taking happens in =~/Documents/Notes2/=. The existing =~/Documents/Notes/= directory
+is left untouched and will be migrated ad-hoc as content is encountered.
+
+** Three singleton org files outside the Denote graph
+
+=inbox.org=, =journal.org=, and =stack.org= are plain org files that link out to
+Denote notes but are never linked to. They are not indexed by Denote and are exempt
+from Denote filename conventions. This keeps transient and workflow files simple while
+preserving Denote's link integrity.
+
+** PARA directory structure
+
+=knowledge/=, =references/=, =active/=, =projects/=, and =archive/= are the Denote
+directories. =knowledge/= and =references/= are flat. =active/= and =projects/= use
+Denote-ID-prefixed subdirectories so that co-located assets (PDFs, images) can live
+alongside their parent org file. =archive/= receives completed items as-is, with an
+=IDENTIFIER==YYYYMMDD= signature added to the directory or file name.
+
+=active/= is named after PARA's "Areas" (ongoing responsibilities with no end date)
+but using a shorter, more descriptive name.
+
+** org-roam deprecated in favour of Denote
+
+The =org-roam= block in =Emacs.org= is commented out and kept for reference during
+migration. Denote replaces it. Reasons: no database dependency, filename-based
+metadata survives file moves, and the flat-with-keywords approach fits the new
+structure better than org-roam's graph model.
+
+=denote-directory= will be set to a list of the five PARA subdirectories, creating a
+unified link graph. Requires Denote 4.1.0+. (Denote config goes in Phase 2.)
+
+** Reminders routing: #journal → journal.org, else → inbox.org
+
+=reminders.el= was extended to inspect each reminder's =:TAG:= property. Reminders
+tagged =#journal= are inserted directly into =journal.org= under today's date heading
+(newest first), with the heading level shifted from =*= to =**= and the creation time
+prepended: =** [HH:MM] Title=. All other reminders are appended to =inbox.org= as before.
+The "Emacs Inbox" Reminders list name is unchanged.
+
+** C-c r keybinding wired in Emacs.org
+
+=my/process-reminders= is now bound to =C-c r= via =Emacs.org=. Previously this was
+documented in a comment in =reminders.el= but not actually configured.
+
 * 2026-04-03 — Introduced elisp/ module directory and reminders workflow
 
 ** elisp/ directory for local Emacs functions

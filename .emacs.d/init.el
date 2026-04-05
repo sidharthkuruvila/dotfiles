@@ -194,6 +194,22 @@ started from a shell."
   (org-roam-db-autosync-mode))
 (message "done setting up org-roam")
 
+(use-package denote
+  :ensure t
+  :custom
+  (denote-directory '("~/Documents/Notes2/knowledge/"
+                      "~/Documents/Notes2/references/"
+                      "~/Documents/Notes2/active/"
+                      "~/Documents/Notes2/projects/"
+                      "~/Documents/Notes2/archive/"))
+  (denote-prompts '(title keywords subdirectory))
+  (denote-known-keywords '("knowledge" "reference" "active" "project" "archive"))
+  (denote-date-prompt-use-org-read-date t)
+  :bind (("C-c n n" . denote)
+         ("C-c n f" . denote-open-or-create)
+         ("C-c n i" . denote-link-or-create)
+         ("C-c n b" . denote-backlinks)))
+
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x b" . counsel-ibuffer)
@@ -292,6 +308,10 @@ started from a shell."
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
+
+(add-to-list 'load-path (expand-file-name "~/dotfiles/elisp"))
+(require 'reminders)
+(global-set-key (kbd "C-c r") #'my/process-reminders)
 
 (let ((local-elisp-file "~/.emacs.d/local.el"))
   (if (file-exists-p local-elisp-file)

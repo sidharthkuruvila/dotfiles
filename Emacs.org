@@ -349,7 +349,9 @@ Use  [[https://github.com/bastibe/org-journal][org-journal]] for daily journalli
           (setq org-journal-file-format "%Y%m%d.org"))
 #+end_src
 
-* Org Roam,
+* Org Roam
+
+# Deprecated 2026-04-05 — replaced by Denote. See the Denote section below.
 
 #+begin_src emacs-lisp
     (message "using package org-roam")
@@ -363,6 +365,31 @@ Use  [[https://github.com/bastibe/org-journal][org-journal]] for daily journalli
       :config
       (org-roam-db-autosync-mode))
     (message "done setting up org-roam")
+#+end_src
+
+* Denote
+
+Permanent notes using the Denote package. The =denote-directory= is a list of
+PARA-structured subdirectories under =~/Documents/Notes2/=. Singleton files
+(=inbox.org=, =journal.org=, =stack.org=) live in the root and are not indexed
+by Denote, but may contain =[[denote:ID]]= links.
+
+#+begin_src emacs-lisp
+  (use-package denote
+    :ensure t
+    :custom
+    (denote-directory '("~/Documents/Notes2/knowledge/"
+                        "~/Documents/Notes2/references/"
+                        "~/Documents/Notes2/active/"
+                        "~/Documents/Notes2/projects/"
+                        "~/Documents/Notes2/archive/"))
+    (denote-prompts '(title keywords subdirectory))
+    (denote-known-keywords '("knowledge" "reference" "active" "project" "archive"))
+    (denote-date-prompt-use-org-read-date t)
+    :bind (("C-c n n" . denote)
+           ("C-c n f" . denote-open-or-create)
+           ("C-c n i" . denote-link-or-create)
+           ("C-c n b" . denote-backlinks)))
 #+end_src
 
 * Completion using Ivy and Counsel
@@ -527,6 +554,7 @@ file ending with =(provide 'symbol)=. See =CLAUDE.md= for conventions.
 #+begin_src emacs-lisp
   (add-to-list 'load-path (expand-file-name "~/dotfiles/elisp"))
   (require 'reminders)
+  (global-set-key (kbd "C-c r") #'my/process-reminders)
 #+end_src
 
 * Local emacs script
