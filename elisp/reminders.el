@@ -226,16 +226,16 @@ and all others to inbox.org. Marks every reminder complete after processing."
 
 (defun my/stack--create-reminder (title)
   "Create a task with TITLE in `my/stack-reminders-list'.
-Returns the externalId of the new task, or nil on failure.
-Strategy: snapshot IDs before, create, then find the new ID after."
-  (let ((before-ids (mapcar (lambda (r) (alist-get 'externalId r))
-                            (my/stack--fetch-reminders))))
-    (shell-command (format "reminders add %S %S" my/stack-reminders-list title))
-    (let* ((after (my/stack--fetch-reminders))
-           (new   (seq-find (lambda (r)
-                              (not (member (alist-get 'externalId r) before-ids)))
-                            after)))
-      (alist-get 'externalId new))))
+Returns the externalId of the new task, or nil on failure."
+  (let* ((raw (shell-command-to-string
+               (format "reminders add %S %S --format json"
+                       my/stack-reminders-list title)))
+         (result (condition-case err
+                     (json-parse-string raw :object-type 'alist)
+                   (error
+                    (message "my/stack--create-reminder: parse error: %s" err)
+                    nil))))
+    (alist-get 'externalId result)))
 
 (defun my/stack--delete-reminder (id)
   "Delete the task with ID from `my/stack-reminders-list'."
