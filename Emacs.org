@@ -585,6 +585,8 @@ file ending with =(provide 'symbol)=. See =CLAUDE.md= for conventions.
   (add-to-list 'load-path (expand-file-name "~/dotfiles/elisp"))
   (require 'reminders)
   (global-set-key (kbd "C-c r") #'my/process-reminders)
+  (global-set-key (kbd "C-c s") #'my/sync-stack)
+  (global-set-key (kbd "C-c S") #'my/stack-tag-entry)
 #+end_src
 
 * Local emacs script

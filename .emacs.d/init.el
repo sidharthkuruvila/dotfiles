@@ -330,6 +330,8 @@ started from a shell."
 (add-to-list 'load-path (expand-file-name "~/dotfiles/elisp"))
 (require 'reminders)
 (global-set-key (kbd "C-c r") #'my/process-reminders)
+(global-set-key (kbd "C-c s") #'my/sync-stack)
+(global-set-key (kbd "C-c S") #'my/stack-tag-entry)
 
 (let ((local-elisp-file "~/.emacs.d/local.el"))
   (if (file-exists-p local-elisp-file)
