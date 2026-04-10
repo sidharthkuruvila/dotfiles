@@ -355,7 +355,9 @@ Each plist has keys: :title :id :status :begin :end."
 (defun my/sync-stack ()
   "Bidirectionally sync stack.org with the Tasks Apple Reminders list."
   (interactive)
-  (let* ((entries      (my/stack--get-entries))
+  (let* ((entries      (sort (my/stack--get-entries)
+                            (lambda (a b) (> (plist-get a :begin)
+                                             (plist-get b :begin)))))
          (reminders    (my/stack--fetch-reminders))
          (reminder-ids (mapcar (lambda (r) (alist-get 'externalId r)) reminders))
          to-archive
