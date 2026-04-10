@@ -258,7 +258,7 @@ Each plist has keys: :title :id :status :begin :end."
       (let (entries)
         (while (re-search-forward "^\\* " nil t)
           (let* ((begin  (match-beginning 0))
-                 (title  (org-get-heading t t t t))
+                 (title  (substring-no-properties (org-get-heading t t t t)))
                  (id     (org-entry-get (point) "REMINDERS_ID"))
                  (status (org-entry-get (point) "STATUS"))
                  (end    (save-excursion
